@@ -22,7 +22,6 @@ function replaceInFile(filePath) {
           ...(SummaryLog[filePath] || []),
           delegateId
         ]
-        console.log(`\x1b[38m Applied ${delegateId} \x1b[0m`);
       }
       return fileContentModified;
     }, fileContent)

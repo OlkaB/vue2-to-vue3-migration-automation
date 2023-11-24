@@ -1,29 +1,33 @@
-const SlotProvideRegex = /<slot[^>]*(name="([\w+\d+-_]+)")/;
-const SlotInjectRegex = /<template[^>]*(slot="([\w+\d+-_]+)")/;
+/**
+ * Match slot syntax without dynamic or scoped slots
+ */
 
-const providesOldSlots = (content) => SlotProvideRegex.test(content);
-const injectsOldSlots = (content) => SlotInjectRegex.test(content);
+const SLOT_PROVIDE_REGEX = /<slot[^>]*[^:](name="([\w+\d+-_]+)")/;
+const SLOT_INJECT_REGEX = /<template[^>]*[^:](slot="([\w+\d+-_]+)")/;
+
+const providesOldSlots = (content) => SLOT_PROVIDE_REGEX.test(content);
+const injectsOldSlots = (content) => SLOT_INJECT_REGEX.test(content);
 
 const replaceOldSlotSyntax = (fileContent, regex) => fileContent.replaceAll(
   new RegExp(regex, 'gm'),
   (match, group1, group2) => match.replace(group1, `#${group2}`),
 );
 
-const MigrateSlots = (fileContent) => {
+const migrateSlots = (fileContent) => {
   if (providesOldSlots(fileContent)) {
-    replaceOldSlotSyntax(fileContent, SlotProvideRegex);
+    replaceOldSlotSyntax(fileContent, SLOT_PROVIDE_REGEX);
   }
 
   if (injectsOldSlots(fileContent)) {
-    replaceOldSlotSyntax(fileContent, SlotInjectRegex);
+    replaceOldSlotSyntax(fileContent, SLOT_INJECT_REGEX);
   }
 
   return fileContent;
 };
 
 module.exports = {
-  SlotProvideRegex,
-  SlotInjectRegex,
+  SLOT_PROVIDE_REGEX,
+  SLOT_INJECT_REGEX,
   replaceOldSlotSyntax,
-  MigrateSlots,
+  migrateSlots,
 };

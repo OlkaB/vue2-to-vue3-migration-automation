@@ -4,7 +4,8 @@
   "description": "tool helping migrate vue2 to vue3",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "migrate": "node index.js"
   },
   "author": "",
   "license": "ISC",

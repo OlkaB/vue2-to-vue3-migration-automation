@@ -14,15 +14,18 @@ const replaceOldSlotSyntax = (fileContent, regex) => fileContent.replaceAll(
 );
 
 const migrateSlots = (fileContent) => {
+  let isApplied = false;
   if (providesOldSlots(fileContent)) {
     replaceOldSlotSyntax(fileContent, SLOT_PROVIDE_REGEX);
+    isApplied = true;
   }
 
   if (injectsOldSlots(fileContent)) {
     replaceOldSlotSyntax(fileContent, SLOT_INJECT_REGEX);
+    isApplied = true;
   }
 
-  return fileContent;
+  return { isApplied, fileContent };
 };
 
 module.exports = {

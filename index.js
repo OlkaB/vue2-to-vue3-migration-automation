@@ -2,24 +2,35 @@ console.log('\x1b[35m Migration starting \x1b[0m');
 
 const fs = require('fs');
 const path = require('path');
+const { migrateSlots } = require('./utils/migrtateSlots/index.js')
 
-const filesPath = '../src';
+const FILE_CONTENT_DELEGATES = {
+  migrateSlots
+}
+const filesPath = './testFiles';
 
-const SummaryLog = {
-
-};
+const SummaryLog = {};
 
 function replaceInFile(filePath) {
   const fileContent = fs.readFileSync(filePath, 'utf8');
-  if (fileContent.includes('Hello')) {
-    const result = fileContent.replace(/Hello/g, 'Hello World');
-    fs.writeFileSync(filePath, result, 'utf8');
 
-    SummaryLog[filePath] = [
-      ...(SummaryLog[filePath] || []),
-      'Hello replaced'
-    ];
-  }
+  const fileContentToSave = Object.entries(FILE_CONTENT_DELEGATES)
+    .reduce((updatedFileContent, [delegateId, delegateMethod]) => {
+      console.log('reduce: ', {
+        delegateId, delegateMethod
+      })
+      const { isApplied, fileContent: fileContentModified } = delegateMethod(updatedFileContent);
+      if (isApplied) {
+        SummaryLog[filePath] = [
+          ...(SummaryLog[filePath] || []),
+          delegateId
+        ]
+        console.log(`\x1b[38m Applied ${delegateId} \x1b[0m`);
+      }
+      return fileContentModified;
+    }, fileContent)
+
+    fs.writeFileSync(filePath, fileContentToSave, 'utf8');
 }
 
 function findVueFiles(dirPath) {

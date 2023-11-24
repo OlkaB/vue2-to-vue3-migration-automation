@@ -11,7 +11,7 @@ const filesPath = './testFiles';
 
 const SummaryLog = {};
 
-function replaceInFile(filePath) {
+function migrateFileContent(filePath) {
   const fileContent = fs.readFileSync(filePath, 'utf8');
 
   const fileContentToSave = Object.entries(FILE_CONTENT_DELEGATES)
@@ -31,16 +31,16 @@ function replaceInFile(filePath) {
 
 function findVueFiles(dirPath) {
   const files = fs.readdirSync(dirPath);
-  // eslint-disable-next-line no-restricted-syntax
-  for (const file of files) {
+
+  files.forEach((file) => {
     const filePath = path.join(dirPath, file);
     const filePathMetaData = fs.statSync(filePath);
     if (filePathMetaData.isDirectory()) {
       findVueFiles(filePath);
     } else if (path.extname(filePath) === '.vue') {
-      replaceInFile(filePath);
+      migrateFileContent(filePath);
     }
-  }
+  });
 }
 
 findVueFiles(filesPath);

@@ -16,10 +16,7 @@ function replaceInFile(filePath) {
 
   const fileContentToSave = Object.entries(FILE_CONTENT_DELEGATES)
     .reduce((updatedFileContent, [delegateId, delegateMethod]) => {
-      console.log('reduce: ', {
-        delegateId, delegateMethod
-      })
-      const { isApplied, fileContent: fileContentModified } = delegateMethod(updatedFileContent);
+      const { isApplied, fileContentModified } = delegateMethod(updatedFileContent);
       if (isApplied) {
         SummaryLog[filePath] = [
           ...(SummaryLog[filePath] || []),

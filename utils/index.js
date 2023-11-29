@@ -1,8 +1,7 @@
 const fs = require("fs");
 const path = require("path");
-const { migrateSlots } = require("./utils/migrtateSlots/index.js");
+const { migrateSlots } = require("./migrtateSlots/index.js");
 
-const FILES_TO_MIGRATE_PATH = "./testFiles";
 const FILE_CONTENT_DELEGATES = {
   migrateSlots,
 };
@@ -33,14 +32,18 @@ function migrateFilesContent(dirPath) {
     const filePathMetaData = fs.statSync(filePath);
 
     if (filePathMetaData.isDirectory()) {
-      findVueFiles(filePath);
+      migrateFilesContent(filePath);
     } else if (path.extname(filePath) === ".vue") {
       migrateFileContent(filePath);
     }
   });
 }
 
-const migrateToVue3 = (filesToMigratePath = FILES_TO_MIGRATE_PATH) => {
+const migrateToVue3 = (filesToMigratePath) => {
+  if(typeof filesToMigratePath !== 'string' || filesToMigratePath === path.basename(filesToMigratePath)) {
+    console.error('Invalid files path', { filesToMigratePath })
+    return
+  }
   console.log("\x1b[35m Migration starting \x1b[0m");
 
   migrateFilesContent(filesToMigratePath);

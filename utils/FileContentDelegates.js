@@ -1,0 +1,9 @@
+const { migrateSlots } = require("./migrtateSlots/index.js");
+const { FILE_TYPES_FOR_MIGRATION } = './FilesToMigrate.js'
+
+exports.FILE_CONTENT_DELEGATES = {
+  migrateSlots: {
+    migrateMethod: migrateSlots,
+    migrateFileTypes: [FILE_TYPES_FOR_MIGRATION.vue]
+  },
+};

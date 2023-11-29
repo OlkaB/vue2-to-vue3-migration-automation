@@ -1,27 +1,40 @@
 const fs = require("fs");
 const path = require("path");
-const { migrateSlots } = require("./migrtateSlots/index.js");
+const { FILES_TO_MIGRATE_EXTENSIONS, EXTENSION_PER_FILE_TYPE } = require("./FilesToMigrate.js");
+const { FILE_CONTENT_DELEGATES } = require("./FileContentDelegates");
 
-const FILE_CONTENT_DELEGATES = {
-  migrateSlots,
-};
+const FILE_ENCODING = 'utf8';
 let SummaryLog = {};
 
-function migrateFileContent(filePath) {
-  const fileContent = fs.readFileSync(filePath, "utf8");
+function checkCanUseMigrateMethodOnFile(fileExtension, delegateMigrateFileTypes) {
+  return delegateMigrateFileTypes.find(
+    (migrateFileType) => EXTENSION_PER_FILE_TYPE[migrateFileType] === fileExtension,
+  );
+}
+
+// TODO drop pure function in favour of speedy not drilling SummaryLog down
+function saveDataToSummaryLog (filePath, delegateId) {
+  SummaryLog[filePath] = [...(SummaryLog[filePath] || []), delegateId];
+}
+
+function migrateFileContent(filePath, fileExtension) {
+  const fileContent = fs.readFileSync(filePath, FILE_ENCODING);
 
   const fileContentToSave = Object.entries(FILE_CONTENT_DELEGATES).reduce(
-    (updatedFileContent, [delegateId, delegateMethod]) => {
-      const { isApplied, fileContentModified } = delegateMethod(updatedFileContent);
+    (updatedFileContent, [delegateId, { migrateMethod, migrateFileTypes }]) => {
+      const canUseMigrateMethod = checkCanUseMigrateMethodOnFile(fileExtension, migrateFileTypes);
+      if (!canUseMigrateMethod) return fileContentModified;
+
+      const { isApplied, fileContentModified } = migrateMethod(updatedFileContent);
       if (isApplied) {
-        SummaryLog[filePath] = [...(SummaryLog[filePath] || []), delegateId];
+        saveDataToSummaryLog(filePath, delegateId)
       }
       return fileContentModified;
     },
     fileContent,
   );
 
-  fs.writeFileSync(filePath, fileContentToSave, "utf8");
+  fs.writeFileSync(filePath, fileContentToSave, FILE_ENCODING);
 }
 
 function migrateFilesContent(dirPath) {
@@ -30,19 +43,25 @@ function migrateFilesContent(dirPath) {
   files.forEach((file) => {
     const filePath = path.join(dirPath, file);
     const filePathMetaData = fs.statSync(filePath);
+    const isDirectory = filePathMetaData.isDirectory();
 
-    if (filePathMetaData.isDirectory()) {
-      migrateFilesContent(filePath);
-    } else if (path.extname(filePath) === ".vue") {
-      migrateFileContent(filePath);
+    if (isDirectory) {
+      return migrateFilesContent(filePath);
+    }
+    const fileExtension = path.extname(filePath);
+    if (FILES_TO_MIGRATE_EXTENSIONS.includes(fileExtension)) {
+      migrateFileContent(filePath, fileExtension);
     }
   });
 }
 
 const migrateToVue3 = (filesToMigratePath) => {
-  if(typeof filesToMigratePath !== 'string' || filesToMigratePath === path.basename(filesToMigratePath)) {
-    console.error('Invalid files path', { filesToMigratePath })
-    return
+  if (
+    typeof filesToMigratePath !== "string" ||
+    filesToMigratePath === path.basename(filesToMigratePath)
+  ) {
+    console.error("Invalid files path", { filesToMigratePath });
+    return;
   }
   console.log("\x1b[35m Migration starting \x1b[0m");
 

@@ -1,4 +1,4 @@
-const { SLOT_INJECT_REGEX } = require('../migrtateSlots');
+const { SLOT_INJECT_REGEX } = require('../index');
 const { ValidInjectSlots, InvalidInjectSlots } = require('./testData');
 
 describe('test SLOT_INJECT_REGEX', () => {

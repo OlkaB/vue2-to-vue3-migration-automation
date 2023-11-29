@@ -1,4 +1,4 @@
-const { SLOT_PROVIDE_REGEX } = require('../migrtateSlots');
+const { SLOT_PROVIDE_REGEX } = require('../index');
 const { ValidProvidedSlots, InvalidProvidedSlots } = require('./testData');
 
 describe('test SLOT_PROVIDE_REGEX', () => {

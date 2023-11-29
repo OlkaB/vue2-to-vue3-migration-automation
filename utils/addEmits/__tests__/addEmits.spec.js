@@ -1,9 +1,10 @@
-const { addEmits } = require('../index');
-const {
-  CasesWithEmits,
-  CasesWithoutEmits
- } = require('./testData');
+// TODO
+// const { addEmits } = require('../index');
+// const {
+//   CasesWithEmits,
+//   CasesWithoutEmits
+//  } = require('./testData');
 
-describe('test addEmits', () => {
-  // TODO
-});
+// describe('test addEmits', () => {
+
+// });

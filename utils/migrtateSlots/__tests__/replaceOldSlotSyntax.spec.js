@@ -1,4 +1,4 @@
-const { SLOT_PROVIDE_REGEX, SLOT_INJECT_REGEX, replaceOldSlotSyntax } = require('../migrtateSlots');
+const { SLOT_PROVIDE_REGEX, SLOT_INJECT_REGEX, replaceOldSlotSyntax } = require('../index');
 const {
   ValidInjectSlots,
   InvalidInjectSlots,

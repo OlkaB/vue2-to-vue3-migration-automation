@@ -9,7 +9,7 @@ describe('test EMIT_REGEX', () => {
     expect(EMIT_REGEX.test(caseString)).toBe(true);
   });
 
-  test.each(CasesWithoutEmits)('EMIT_REGEX should fail with strings not containing emits', async (caseString) => {
+  test.each(CasesWithoutEmits)('EMIT_REGEX should not pass with strings not containing emits', async (caseString) => {
     expect(EMIT_REGEX.test(caseString)).toBe(false);
   });
 

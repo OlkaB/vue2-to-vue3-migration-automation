@@ -21,10 +21,7 @@ function migrateToVue3(filesToMigratePath) {
 }
 
 function isValuePotentialSystemPath(value) {
-  return (
-    typeof filesToMigratePath == "string" &&
-    filesToMigratePath === path.basename(filesToMigratePath)
-  );
+  return typeof value === 'string' && value !== path.basename(value);
 }
 
 function saveSummaryLog(log) {
@@ -54,11 +51,11 @@ function migrateFilesFromPath(dirPath) {
 
 function migrateFile(filePath, fileExtension) {
   const fileContent = fs.readFileSync(filePath, FILE_ENCODING);
-  const fileContentToSave = updateFileContent(fileContent, fileExtension);
+  const fileContentToSave = updateFileContent({ filePath, fileContent, fileExtension });
   fs.writeFileSync(filePath, fileContentToSave, FILE_ENCODING);
 }
 
-function updateFileContent(fileContent, fileExtension) {
+function updateFileContent({ filePath, fileContent, fileExtension }) {
   return Object.entries(FILE_CONTENT_DELEGATES).reduce(
     (updatedFileContent, [delegateId, { migrateMethod, migrateFileTypes }]) => {
       const canUseMigrateMethod = checkCanUseMigrateMethodOnFile(fileExtension, migrateFileTypes);

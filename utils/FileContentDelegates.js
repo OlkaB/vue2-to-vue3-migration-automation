@@ -1,5 +1,5 @@
-const { migrateSlots } = require("./migrtateSlots/index.js");
-const { FILE_TYPES_FOR_MIGRATION } = './FilesToMigrate.js'
+const { migrateSlots } = require('./migrtateSlots/index.js');
+const { FILE_TYPES_FOR_MIGRATION } = require('./FilesToMigrate.js');
 
 exports.FILE_CONTENT_DELEGATES = {
   migrateSlots: {

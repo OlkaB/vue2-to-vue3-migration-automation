@@ -23,7 +23,7 @@ function migrateFileContent(filePath, fileExtension) {
   const fileContentToSave = Object.entries(FILE_CONTENT_DELEGATES).reduce(
     (updatedFileContent, [delegateId, { migrateMethod, migrateFileTypes }]) => {
       const canUseMigrateMethod = checkCanUseMigrateMethodOnFile(fileExtension, migrateFileTypes);
-      if (!canUseMigrateMethod) return fileContentModified;
+      if (!canUseMigrateMethod) return updatedFileContent;
 
       const { isApplied, fileContentModified } = migrateMethod(updatedFileContent);
       if (isApplied) {

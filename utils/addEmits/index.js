@@ -2,7 +2,7 @@ const EMIT_REGEX = /\$emit\(('[^']*')/;
 const VUE_COMPONENT_INSTANCE_START_STRING = "export default {";
 const START_STRING_LENGTH = VUE_COMPONENT_INSTANCE_START_STRING.length;
 
-function addEmits(fileContent) {
+function addEmits(fileContent, filePath) {
   let fileContentModified = fileContent;
   const emitsNames = getAllEmitsNames(fileContent);
 
@@ -35,6 +35,7 @@ function addEmitsToComponent(fileContent, emitsNames) {
   const index = fileContent.indexOf(VUE_COMPONENT_INSTANCE_START_STRING);
 
   if (index === -1) {
+    console.error(`Couldn't add emits entry to component instance. No '${VUE_COMPONENT_INSTANCE_START_STRING}' string found in `, filePath)
     return fileContent;
   }
 

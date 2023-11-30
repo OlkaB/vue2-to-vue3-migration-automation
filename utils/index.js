@@ -17,7 +17,7 @@ function migrateToVue3(filesToMigratePath) {
   migrateFilesFromPath(filesToMigratePath);
   saveSummaryLog(SummaryLog);
 
-  console.log("\x1b[32m Migration ended \x1b[0m", SummaryLog);
+  console.log("\x1b[35m Migration ended \x1b[0m");
 }
 
 function isValuePotentialSystemPath(value) {
@@ -27,7 +27,7 @@ function isValuePotentialSystemPath(value) {
 function saveSummaryLog(log) {
   fs.writeFile("migration-summary.json", JSON.stringify(log, null, 2), (err) => {
     if (err) throw err;
-    console.log("\x1b[31m Migration summary saved to a file. \x1b[0m");
+    console.log("\x1b[35m Migration summary saved to a file. \x1b[0m");
   });
 }
 
@@ -61,7 +61,7 @@ function updateFileContent({ filePath, fileContent, fileExtension }) {
       const canUseMigrateMethod = checkCanUseMigrateMethodOnFile(fileExtension, migrateFileTypes);
       if (!canUseMigrateMethod) return updatedFileContent;
 
-      const fileContentModified = migrateMethod(updatedFileContent);
+      const fileContentModified = migrateMethod(updatedFileContent, filePath);
       const isChangeApplied = fileContent !== fileContentModified;
       if (isChangeApplied) {
         saveDataToSummaryLog(filePath, delegateId);

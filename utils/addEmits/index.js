@@ -42,7 +42,7 @@ function addEmitsToComponent(fileContent, emitsNames) {
   const after = fileContent.substring(index + START_STRING_LENGTH);
 
   // place insertion in its own new line
-  return `${before}\n${emitsSyntaxToInsert}${after}`;
+  return `${before}\n  ${emitsSyntaxToInsert}${after}`;
 }
 
 module.exports = {

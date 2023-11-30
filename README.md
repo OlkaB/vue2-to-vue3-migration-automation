@@ -7,3 +7,4 @@ tool helping migrate vue2 to vue3
 # Current state:
 - simple slot syntax replacement
 - adding 'emits' entry with emitted by component events names
+- trnaslations via translation instance replacement

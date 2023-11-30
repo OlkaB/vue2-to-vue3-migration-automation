@@ -99,6 +99,33 @@ const FilesContentWithEmits = [
       }
     }
   }
+  </script>`,
+  `<script>
+  import IconClose from '@carbon/icons-vue/es/close/16';
+
+  export default {
+    name: 'MLDraggablePanel',
+    components: {
+      CvIconButton,
+      MLResizable
+    },
+    data() {
+      return {
+        IconClose,
+        isClosed: false
+      };
+    },
+    watch: {
+      isClosed() {
+        this.$emit('close');
+      }
+    },
+    methods: {
+      closePanel() {
+        this.$emit('close');
+      }
+    }
+  }
   </script>`
 ];
 

@@ -17,13 +17,13 @@ function getAllEmitsNames(fileContent) {
   if (typeof fileContent !== "string") return null;
   let match;
   const regex = new RegExp(EMIT_REGEX, 'g');
-  const emitNames = [];
+  const emitNames = new Set();
 
   while ((match = regex.exec(fileContent)) !== null) {
-    emitNames.push(match[1]);
+    emitNames.add(match[1]);
   }
 
-  return emitNames;
+  return Array.from(emitNames);
 }
 
 function wrapEmitNamesInEmitsSyntax(emitNames) {

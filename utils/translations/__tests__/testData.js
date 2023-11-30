@@ -49,7 +49,38 @@ const NotMigrateableTranslations = [
   },`
 ];
 
+const MigrateableFilesContent = [
+  `export const ActionButtons = (federatedItemName) => ({
+    [ToolbarActions.DOWNLOAD]: {
+      label: vueI18n.t('global.download'),
+      icon: IconDownload,
+      id: ToolbarActions.DOWNLOAD
+    },
+    [ToolbarActions.FEDERATE]: {
+      label: VueI18n.t('components.widget.federateItem', { itemName: federatedItemName }),
+      icon: IconFederate,
+      id: ToolbarActions.FEDERATE
+    },
+  });`,
+  `export const ActionButtons = (federatedItemName) => ({
+    [ToolbarActions.COPY_ITEM]: {
+      label: i18n.tc('global.copyItem', 1),
+      icon: IconDownload,
+      id: ToolbarActions.DOWNLOAD
+    },
+    [ToolbarActions.ENLARGE]: {
+      label: VueI18n.t('components.widget.largePreview'),
+      icon: IconEnlarge,
+      id: ToolbarActions.ENLARGE
+    }
+  });`,
+  `loadingText() {
+    return VueI18n.t('global.pleaseWaitLoading', { itemName: i18n.tc('global.option', 2).toLowerCase() });
+  },`
+];
+
 module.exports = {
   MigrateableTranslations,
-  NotMigrateableTranslations
+  NotMigrateableTranslations,
+  MigrateableFilesContent
 };

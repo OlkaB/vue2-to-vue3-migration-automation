@@ -1,12 +1,12 @@
-const GLOBAL_TRANSLATIONS_REGEX = /\.(t|tc)\('/;
+const TRANSLATIONS_VIA_INSTANCE_REGEX = /\.(t|tc)\('/;
 const TRANSLATION_CHUNK_TO_ADD = 'global.'
 
 function migrateTranslations (fileContent) {
   let fileContentModified = fileContent;
-  if(GLOBAL_TRANSLATIONS_REGEX.test(fileContent)) {
+  if(TRANSLATIONS_VIA_INSTANCE_REGEX.test(fileContent)) {
     fileContentModified = replaceOldTranslationsSyntax(
       fileContent,
-      GLOBAL_TRANSLATIONS_REGEX
+      TRANSLATIONS_VIA_INSTANCE_REGEX
     );
   }
   return fileContentModified
@@ -20,5 +20,5 @@ function replaceOldTranslationsSyntax (fileContent, regex) {
 
 module.exports = {
   migrateTranslations,
-  GLOBAL_TRANSLATIONS_REGEX
+  TRANSLATIONS_VIA_INSTANCE_REGEX
 }

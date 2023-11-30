@@ -4,21 +4,22 @@ const START_STRING_LENGTH = VUE_COMPONENT_INSTANCE_START_STRING.length;
 
 function addEmits(fileContent) {
   let fileContentModified = fileContent;
-  const emitsNames = getAllEmitsNames(fileContent, EMIT_REGEX);
+  const emitsNames = getAllEmitsNames(fileContent);
 
-  if (emitsNames) {
+  if (Array.isArray(emitsNames) && emitsNames.length > 0) {
     fileContentModified = addEmitsToComponent(fileContent, emitsNames);
   }
 
   return fileContentModified;
 }
 
-function getAllEmitsNames(fileContent, regex) {
+function getAllEmitsNames(fileContent) {
   if (typeof fileContent !== "string") return null;
   let match;
+  const regex = new RegExp(EMIT_REGEX, 'g');
   const emitNames = [];
 
-  while ((match = regex.exec(inputString)) !== null) {
+  while ((match = regex.exec(fileContent)) !== null) {
     emitNames.push(match[1]);
   }
 
@@ -26,7 +27,9 @@ function getAllEmitsNames(fileContent, regex) {
 }
 
 function wrapEmitNamesInEmitsSyntax(emitNames) {
-  return `emits: ${emitNames},`;
+  return `
+    emits: [${emitNames.join(', ')}],
+  `;
 }
 
 function addEmitsToComponent(fileContent, emitsNames) {
@@ -41,7 +44,7 @@ function addEmitsToComponent(fileContent, emitsNames) {
   const after = fileContent.substring(index + START_STRING_LENGTH);
 
   // place insertion in its own new line
-  return `${before}\n  ${emitsSyntaxToInsert}\n  ${after}`;
+  return `${before}${emitsSyntaxToInsert}${after}`;
 }
 
 module.exports = {

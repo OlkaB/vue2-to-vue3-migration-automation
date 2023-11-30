@@ -5,7 +5,7 @@ const {
   ValidProvidedSlots,
   InvalidProvidedSlots
  } = require('./testData');
- const { getWhiteSpaceCleanedString } = require('./testUtils');
+ const { getWhiteSpaceCleanedString } = require('../../testUtils');
 
 
 

@@ -5,29 +5,31 @@
 const SLOT_PROVIDE_REGEX = /<slot[^>]*[^:](name="([\w+\d+-_]+)")/;
 const SLOT_INJECT_REGEX = /<template[^>]*[^:](slot="([\w+\d+-_]+)")/;
 
-const providesOldSlots = (content) => SLOT_PROVIDE_REGEX.test(content);
-const injectsOldSlots = (content) => SLOT_INJECT_REGEX.test(content);
-
-const replaceOldSlotSyntax = (fileContent, regex) => fileContent.replaceAll(
-  new RegExp(regex, 'gm'),
-  (match, group1, group2) => match.replace(group1, `#${group2}`),
-);
-
-const migrateSlots = (fileContent) => {
-  let isApplied = false;
-  let fileContentModified = fileContent
+function migrateSlots(fileContent) {
+  let fileContentModified = fileContent;
   if (providesOldSlots(fileContent)) {
     fileContentModified = replaceOldSlotSyntax(fileContent, SLOT_PROVIDE_REGEX);
-    isApplied = true;
   }
 
   if (injectsOldSlots(fileContent)) {
     fileContentModified = replaceOldSlotSyntax(fileContent, SLOT_INJECT_REGEX);
-    isApplied = true;
   }
 
-  return { isApplied, fileContentModified };
-};
+  return fileContentModified;
+}
+
+function providesOldSlots(content) {
+  return SLOT_PROVIDE_REGEX.test(content);
+}
+function injectsOldSlots(content) {
+  return SLOT_INJECT_REGEX.test(content);
+}
+
+function replaceOldSlotSyntax(fileContent, regex) {
+  return fileContent.replaceAll(new RegExp(regex, "gm"), (match, group1, group2) =>
+    match.replace(group1, `#${group2}`)
+  );
+}
 
 module.exports = {
   SLOT_PROVIDE_REGEX,

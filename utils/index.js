@@ -61,8 +61,9 @@ function updateFileContent({ filePath, fileContent, fileExtension }) {
       const canUseMigrateMethod = checkCanUseMigrateMethodOnFile(fileExtension, migrateFileTypes);
       if (!canUseMigrateMethod) return updatedFileContent;
 
-      const { isApplied, fileContentModified } = migrateMethod(updatedFileContent);
-      if (isApplied) {
+      const fileContentModified = migrateMethod(updatedFileContent);
+      const isChangeApplied = fileContent !== fileContentModified;
+      if (isChangeApplied) {
         saveDataToSummaryLog(filePath, delegateId);
       }
       return fileContentModified;

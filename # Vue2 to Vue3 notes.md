@@ -4,7 +4,7 @@
 Tools: https://vue2-migration-helper.netlify.app/ [deprecated https://github.com/mubaidr/vue2-migration-helper]
 Nice reading: https://docs.gitlab.com/ee/development/fe_guide/vue3_migration.html
 
-## Slots
+## ✅ Slots (optional, as name="" is still valid)
 From:                                               To:
 <slot                                               <slot
   v-if="title || $slots['card__title']"              v-if="title || $slots['card__title']"
@@ -15,7 +15,7 @@ From:                                  To:
 <template slot="slotName">      =>     <template #slotName>
 
 
-## emits
+## ✅ emits
 - If:
   this.$emit('default-click', payload)
   this.$emit('update:buttons-config', payload)
@@ -28,15 +28,10 @@ From:                                  To:
   ],
 
 
-## translations
+## ✅ translations
 From:                                          To:
 vueI18n.t('global.copy')          =>           vueI18n.global.t('global.copy')
 vueI18n.tc('global.product', 1)   =>           vueI18n.global.tc('global.product', 1)
-
-
-## attribute.sync
-From:                                                               To:
-:allowed-columns-targets.sync="allowedColumnsTargets"      =>       v-model:allowed-columns-targets="allowedColumnsTargets"
 
 
 ## .native
@@ -90,6 +85,25 @@ methods: {
     this.$emit('update:modelValue', title)
   }
 }
+
+.sync: see [https://v3-migration.vuejs.org/breaking-changes/v-model.html#migration-strategy]
+
+## 🚧 attribute.sync
+From:                                                                    To:
+Parent:
+   <UserName   :first-name.sync="first"  :last-name.sync="last" />   =>  <UserName   v-model:first-name="first"   v-model:last-name="last" />
+
+Child - does not change apart from event names being added to emits:
+props: {
+  firstName: String,
+  lastName: String
+}
+ emits: ['update:modelValue', 'update:syncA', 'update:syncB'],
+ ...
+this.$emit('update:firstName', 'first name')
+this.$emit('update:lastName', 'last name')
+
+
 
 ## Vue instance methods :
 $set / Vue.set, $delete / Vue.delete, $on, $off, $once, $destroy

@@ -1,7 +1,10 @@
+const ATTRIBUTE_SYNC_REGEX = /placeholder/
+
 const migrateAttributeSync = () => {
   // TODO
 }
 
 module.exports = {
-  migrateAttributeSync
+  migrateAttributeSync,
+  ATTRIBUTE_SYNC_REGEX
 }

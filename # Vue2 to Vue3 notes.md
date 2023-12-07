@@ -43,7 +43,7 @@ From                         To
 From                                     To
 $listeners[listenerName]    =>      $attrs.$listeners[listenerName]
 
-## $props
+## 🚧 $props
 From                             To
 $props[propName]    =>      $attrs.$props[propName]
 

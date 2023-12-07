@@ -17,7 +17,7 @@ function removeEventNativeModifier (fileContent) {
 function removeModifier (fileContent, regex) {
   return fileContent.replaceAll(
     new RegExp(regex, "gm"),
-    ''
+    (match, group1) => match.replace(group1, '')
   );
 }
 

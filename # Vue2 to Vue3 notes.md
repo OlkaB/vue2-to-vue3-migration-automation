@@ -88,7 +88,7 @@ methods: {
 
 .sync: see [https://v3-migration.vuejs.org/breaking-changes/v-model.html#migration-strategy]
 
-## 🚧 attribute.sync
+## ✅ attribute.sync
 From:                                                                    To:
 Parent:
    <UserName   :first-name.sync="first"  :last-name.sync="last" />   =>  <UserName   v-model:first-name="first"   v-model:last-name="last" />

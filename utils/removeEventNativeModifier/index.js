@@ -1,4 +1,4 @@
-const EVENT_NATIVE_REGEXP = /placeholder/
+const EVENT_NATIVE_REGEXP = /@[^"'>]*(\.native\b)[^"'>]*/
 
 function removeEventNativeModifier (fileContent) {
   // TODO

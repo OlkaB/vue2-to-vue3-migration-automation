@@ -41,11 +41,11 @@ From                         To
 
 ## $listeners
 From                                     To
-this.$listeners[listenerName]    =>      this.$attrs.$listeners[listenerName]
+$listeners[listenerName]    =>      $attrs.$listeners[listenerName]
 
 ## $props
 From                             To
-this.$props[propName]    =>      this.$attrs.$props[propName]
+$props[propName]    =>      $attrs.$props[propName]
 
 ## $attrs now includes class and style attributes
 

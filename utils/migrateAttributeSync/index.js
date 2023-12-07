@@ -1,4 +1,4 @@
-const ATTRIBUTE_SYNC_REGEX = /placeholder/
+const ATTRIBUTE_SYNC_REGEX = /:([\w-]+)\.sync="([^"']*)"/
 
 const migrateAttributeSync = () => {
   // TODO

@@ -5,7 +5,8 @@ const MigrateableAttributeSync = [
   />`,
   `<Component
     :name.sync="name"
-    :surname.sync="surname"
+    :other-attribute="ok"
+    :vip-user-surname.sync="surname"
   />`,
   `<SomeForm
     :age.sync="user.age"
@@ -20,7 +21,7 @@ const NonMigrateableAttributeSync = [
   />`,
   `<Component
     :name="name"
-    :surname="surname"
+    surname.sync="surname"
   />`,
   `<SomeForm
     :age.number="user.age"

@@ -3,6 +3,8 @@ const VUE_COMPONENT_INSTANCE_START_STRING = "export default {";
 const START_STRING_LENGTH = VUE_COMPONENT_INSTANCE_START_STRING.length;
 
 function addEmits(fileContent, filePath) {
+  if(typeof fileContent !== 'string') return '';
+
   let fileContentModified = fileContent;
   const emitsNames = getAllEmitsNames(fileContent);
 

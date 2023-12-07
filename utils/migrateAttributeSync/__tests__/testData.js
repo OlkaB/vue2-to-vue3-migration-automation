@@ -8,9 +8,7 @@ const MigrateableAttributeSync = [
     :other-attribute="ok"
     :vip-user-surname.sync="surname"
   />`,
-  `<SomeForm
-    :age.sync="user.age"
-    :address.sync="user.address"
+  `<SomeForm :age.sync="user.age"  v-model="category"   :address.sync="user.address"
   >...</SomeForm>`
 ];
 

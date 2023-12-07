@@ -2,7 +2,7 @@
 Tool helping migrate vue2 to vue3.
 
 # Please note
-This is quickly/simply built tool to migrate basic Vue2 to Vue3 syntax. Should be evolved further with more type checks and tests.
+This is quickly/simply built tool to migrate basic Vue2 to Vue3 syntax [POC]. Should be evolved further with more type checks and tests.
 
 # Use script:
 `yarn migrate`

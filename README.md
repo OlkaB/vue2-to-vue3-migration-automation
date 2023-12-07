@@ -11,3 +11,4 @@ This is quickly/simply built tool to migrate basic Vue2 to Vue3 syntax. Should b
 - simple slot syntax replacement
 - adding 'emits' entry with emitted by component events names
 - trnaslations via translation instance replacement
+- attribute.sync replaced with v-model:attribute

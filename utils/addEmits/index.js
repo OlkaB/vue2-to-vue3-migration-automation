@@ -3,13 +3,13 @@ const VUE_COMPONENT_INSTANCE_START_STRING = "export default {";
 const START_STRING_LENGTH = VUE_COMPONENT_INSTANCE_START_STRING.length;
 
 function addEmits(fileContent, filePath) {
-  if(typeof fileContent !== 'string') return '';
+  if(typeof fileContent !== 'string') return fileContent;
 
   let fileContentModified = fileContent;
   const emitsNames = getAllEmitsNames(fileContent);
 
   if (Array.isArray(emitsNames) && emitsNames.length > 0) {
-    fileContentModified = addEmitsToComponent(fileContent, emitsNames);
+    fileContentModified = addEmitsToComponent({fileContent, emitsNames, filePath});
   }
 
   return fileContentModified;
@@ -32,7 +32,7 @@ function wrapEmitNamesInEmitsSyntax(emitNames) {
   return `emits: [${emitNames.join(', ')}],`;
 }
 
-function addEmitsToComponent(fileContent, emitsNames) {
+function addEmitsToComponent({fileContent, emitsNames, filePath}) {
   const emitsSyntaxToInsert = wrapEmitNamesInEmitsSyntax(emitsNames);
   const index = fileContent.indexOf(VUE_COMPONENT_INSTANCE_START_STRING);
 

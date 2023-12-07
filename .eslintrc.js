@@ -25,6 +25,7 @@ module.exports = {
     ecmaVersion: 'latest',
   },
   rules: {
+    'semi': ["error", "always"]
   },
   plugins: ['jest']
-};
+}

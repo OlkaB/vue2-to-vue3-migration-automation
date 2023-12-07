@@ -4,6 +4,7 @@ const {
   NonMigrateableAttributeSync
  } = require('./testData');
 
+// TODO add tests for non strings
 
  describe('test migrateAttributeSync', () => {
   test.each([

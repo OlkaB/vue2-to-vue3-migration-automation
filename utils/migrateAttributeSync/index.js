@@ -3,7 +3,7 @@ const NEW_SYNC_SYNTAX_START_CHUNK = 'v-model:'
 
 
 function migrateAttributeSync (fileContent) {
-  if(typeof fileContent !== 'string') return '';
+  if(typeof fileContent !== 'string') return fileContent;
 
   let fileContentModified = fileContent;
   if(ATTRIBUTE_SYNC_REGEX.test(fileContent)) {

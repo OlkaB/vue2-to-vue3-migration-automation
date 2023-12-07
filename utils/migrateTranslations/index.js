@@ -2,7 +2,7 @@ const TRANSLATIONS_VIA_INSTANCE_REGEX = /\.(t|tc)\('/;
 const TRANSLATION_CHUNK_TO_ADD = 'global.'
 
 function migrateTranslations (fileContent) {
-  if(typeof fileContent !== 'string') return '';
+  if(typeof fileContent !== 'string') return fileContent;
 
   let fileContentModified = fileContent;
   if(TRANSLATIONS_VIA_INSTANCE_REGEX.test(fileContent)) {

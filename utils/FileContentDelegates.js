@@ -2,6 +2,7 @@ const { FILE_TYPES_FOR_MIGRATION } = require('./FilesToMigrate.js');
 const { migrateSlots } = require('./migrtateSlots/index.js');
 const { addEmits } = require('./addEmits/index.js');
 const { migrateTranslations } = require('./migrateTranslations/index.js');
+const { removeEventNativeModifier } = require('./removeEventNativeModifier/index.js');
 const { migrateAttributeSync } = require('./migrateAttributeSync/index.js');
 
 
@@ -20,6 +21,9 @@ exports.FILE_CONTENT_DELEGATES = {
       FILE_TYPES_FOR_MIGRATION.vue,
       FILE_TYPES_FOR_MIGRATION.js
     ]
+  },
+  removeEventNativeModifier: {
+    migrateMethod: removeEventNativeModifier,
   },
   migrateAttributeSync: {
     migrateMethod: migrateAttributeSync,

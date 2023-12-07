@@ -6,7 +6,7 @@ const SLOT_PROVIDE_REGEX = /<slot[^>]*[^:](name="([\w+\d+-_]+)")/;
 const SLOT_INJECT_REGEX = /<template[^>]*[^:](slot="([\w+\d+-_]+)")/;
 
 function migrateSlots(fileContent) {
-  if(typeof fileContent !== 'string') return '';
+  if(typeof fileContent !== 'string') return fileContent;
 
   let fileContentModified = fileContent;
   if (providesOldSlots(fileContent)) {

@@ -34,18 +34,18 @@ vueI18n.t('global.copy')          =>           vueI18n.global.t('global.copy')
 vueI18n.tc('global.product', 1)   =>           vueI18n.global.tc('global.product', 1)
 
 
-## .native
+## ✅ .native
 From                         To
 @click.native      =>        @click
 
 
-## $listeners
+## 🚧 $listeners
 From                                     To
-this.$listeners[listenerName]    =>      this.$attrs.$listeners[listenerName]
+$listeners[listenerName]    =>      $attrs.$listeners[listenerName]
 
 ## $props
 From                             To
-this.$props[propName]    =>      this.$attrs.$props[propName]
+$props[propName]    =>      $attrs.$props[propName]
 
 ## $attrs now includes class and style attributes
 

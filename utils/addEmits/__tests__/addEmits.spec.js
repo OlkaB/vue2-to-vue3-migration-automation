@@ -1,4 +1,4 @@
-const { addEmits } = require('../index');
+const { addEmits, EMIT_REGEX } = require('../index');
 const { FilesContentWithEmits, FilesContentWithoutEmits } = require('./testData');
 
 describe('test addEmits', () => {
@@ -9,6 +9,7 @@ describe('test addEmits', () => {
   ])('addEmits should add component emitted event names as Vue3 emits syntax', async (fileContent, expectedEmitsSyntax) => {
     const modifiedContent = addEmits(fileContent);
     expect(modifiedContent).not.toEqual(fileContent);
+    expect(EMIT_REGEX.test(modifiedContent)).toBe(false);
     expect(modifiedContent).toContain(expectedEmitsSyntax);
   });
 

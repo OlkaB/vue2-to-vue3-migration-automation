@@ -1,4 +1,4 @@
-const { migrateAttributeSync } = require('../index');
+const { migrateAttributeSync, ATTRIBUTE_SYNC_REGEX } = require('../index');
 const {
   MigrateableAttributeSync,
   NonMigrateableAttributeSync,
@@ -15,7 +15,9 @@ describe('test migrateAttributeSync', () => {
     const modifiedContent = migrateAttributeSync(fileContent);
     const hasAllExpectedChunks = migratedChunks
       .every((chunk) => modifiedContent.includes(chunk));
+
     expect(modifiedContent).not.toEqual(fileContent);
+    expect(ATTRIBUTE_SYNC_REGEX.test(modifiedContent)).toBe(false);
     expect(hasAllExpectedChunks).toBe(true);
   });
 

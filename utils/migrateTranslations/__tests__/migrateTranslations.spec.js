@@ -1,4 +1,4 @@
-const { migrateTranslations } = require('../index');
+const { migrateTranslations, TRANSLATIONS_VIA_INSTANCE_REGEX } = require('../index');
 const {
   MigrateableFilesContent,
   NotMigrateableTranslations,
@@ -13,7 +13,9 @@ describe('test migrateTranslations', () => {
     const modifiedContent = migrateTranslations(fileContent);
     const hasAllExpectedTranslationChunks = expectedTranslationsChunks
       .every((chunk) => modifiedContent.includes(chunk));
+
     expect(modifiedContent).not.toEqual(fileContent);
+    expect(TRANSLATIONS_VIA_INSTANCE_REGEX.test(modifiedContent)).toBe(false);
     expect(hasAllExpectedTranslationChunks).toBe(true);
   });
 

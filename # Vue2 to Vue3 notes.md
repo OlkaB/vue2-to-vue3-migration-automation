@@ -86,7 +86,6 @@ methods: {
   }
 }
 
-.sync: see [https://v3-migration.vuejs.org/breaking-changes/v-model.html#migration-strategy]
 
 ## ✅ attribute.sync
 From:                                                                    To:

@@ -10,5 +10,7 @@ This is quickly/simply built tool to migrate basic Vue2 to Vue3 syntax [POC]. Sh
 # Current state:
 - simple slot syntax replacement
 - adding 'emits' entry with emitted by component events names
-- trnaslations via translation instance replacement
+- translations via translation instance replacement
 - attribute.sync replaced with v-model:attribute
+- $props and $listeners are now available via $attrs.$props and $attrs.$listeners
+- removing .native event modifier

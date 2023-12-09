@@ -39,11 +39,11 @@ From                         To
 @click.native      =>        @click
 
 
-## 🚧 $listeners
+## ✅ $listeners
 From                                     To
 $listeners[listenerName]    =>      $attrs.$listeners[listenerName]
 
-## 🚧 $props
+## ✅ $props
 From                             To
 $props[propName]    =>      $attrs.$props[propName]
 
@@ -62,9 +62,10 @@ From                                  To
 ?
 
 ## Plugins
-
+?
 
 ## Directives
+?
 
 ## v-model
 First the property value has been renamed to modelValue

@@ -7,10 +7,20 @@ const MigrateableStrings = [
 destroyed() {
 window.removeEventListener('resize', this.onResize);
 },`,
+  `
+  beforeDestroy() {
+  window.removeEventListener('resize', this.trackWindowWidth);
+},
+methods: {
+  ...
+},
+destroyed() {
+window.removeEventListener('resize', this.onResize);
+},`,
 ];
 
 const NonMigrateableStrings = [
-  `this.$on('cv:beforeDestroy', (srcComponent) => this.onCvBeforeDestroy(srcComponent));`,
+  `this.$on('cv:beforeDestroy', (srcComponent) => onCvBeforeDestroy(){};`,
   `},
   onCvBeforeDestroy(srcComponent) {
     const tabIndex = this.tabs.findIndex((item) => item.uid === srcComponent.uid);

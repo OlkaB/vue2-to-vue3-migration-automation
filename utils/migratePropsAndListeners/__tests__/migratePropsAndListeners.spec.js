@@ -14,12 +14,12 @@ describe('test migratePropsAndListeners', () => {
     [MigrateableStrings[5], ['v-bind="{...$attrs.$props, otherProp}"', 'v-on="$attrs.$listeners"', "if (!this.$attrs.$listeners['tertiary-click']"]],
   ])('migratePropsAndListeners should replace every $props & $listeners syntax with $attrs.$props or $attrs.$listeners', async (fileContent, expectedTranslationsChunks) => {
     const modifiedContent = migratePropsAndListeners(fileContent);
-    const hasAllExpectedTranslationChunks = expectedTranslationsChunks
+    const hasAllExpectedChunks = expectedTranslationsChunks
       .every((chunk) => modifiedContent.includes(chunk));
 
     expect(modifiedContent).not.toEqual(fileContent);
     expect(PROPS_LISTENERS_REGEX.test(modifiedContent)).toBe(false);
-    expect(hasAllExpectedTranslationChunks).toBe(true);
+    expect(hasAllExpectedChunks).toBe(true);
   });
 
   test.each(NonMigrateableStrings)('migratePropsAndListeners should not change file content if it doesn\'t contain translations via translation instance', async (fileContent) => {

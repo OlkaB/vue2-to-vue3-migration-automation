@@ -12,7 +12,7 @@ const MigrateableProps = [
   }
 },`,
   `watch: {
-  $props: {
+  $props.config: {
     deep: true,
     handler() {
       const newConfig = this.getSliderConfig();
@@ -90,6 +90,11 @@ onRemove() {
       return omit($.props, ParameterSpecificProps);
     }
   }`,
+  `computed: {
+    commonPropsToBind() {
+      return omit(object.$props, ParameterSpecificProps);
+    }
+  }`,
   `<CvTextInput
   ref="inputWrapper"
   v-model="inputValue"
@@ -112,7 +117,14 @@ const NonMigrateableListeners = [
     ...$.listeners,
     change: (event) => this.onChange(event)
   };
-},`, `<div
+},`,
+  `inputListeners() {
+return {
+  something.$listeners,
+  change: (event) => this.onChange(event)
+};
+},`,
+  `<div
 role="navigation"
 v-bind="$attrs.$listeners"
 >`,

@@ -43,7 +43,7 @@ From                         To
 From                                     To
 $listeners[listenerName]    =>      $attrs.$listeners[listenerName]
 
-## $props
+## 🚧 $props
 From                             To
 $props[propName]    =>      $attrs.$props[propName]
 
@@ -86,7 +86,6 @@ methods: {
   }
 }
 
-.sync: see [https://v3-migration.vuejs.org/breaking-changes/v-model.html#migration-strategy]
 
 ## ✅ attribute.sync
 From:                                                                    To:

@@ -1,10 +1,10 @@
 const { removeEventNativeModifier, EVENT_NATIVE_REGEXP } = require('../index');
 const {
   MigrateableEventNative,
-  NonMigrateableEventNative
- } = require('./testData');
+  NonMigrateableEventNative,
+} = require('./testData');
 
- describe('test removeEventNativeModifier', () => {
+describe('test removeEventNativeModifier', () => {
   test.each([
     [MigrateableEventNative[0], ['@click="dsdsd"', '@mouseovernative="dsdsds"', '@hover=""']],
     [MigrateableEventNative[1], ['@click.prevent="dsdsd"', '@click.stop.prevent']],

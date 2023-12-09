@@ -1,23 +1,23 @@
-const fs = require("fs");
-const path = require("path");
-const { FILES_TO_MIGRATE_EXTENSIONS, EXTENSION_PER_FILE_TYPE } = require("./FilesToMigrate.js");
-const { FILE_CONTENT_DELEGATES } = require("./FileContentDelegates");
+const fs = require('fs');
+const path = require('path');
+const { FILES_TO_MIGRATE_EXTENSIONS, EXTENSION_PER_FILE_TYPE } = require('./FilesToMigrate');
+const { FILE_CONTENT_DELEGATES } = require('./FileContentDelegates');
 
-const FILE_ENCODING = "utf8";
-let SummaryLog = {};
+const FILE_ENCODING = 'utf8';
+const SummaryLog = {};
 
 function migrateToVue3(filesToMigratePath) {
-  console.log("\x1b[35m Migration starting \x1b[0m");
+  console.log('\x1b[35m Migration starting \x1b[0m');
 
   if (!isValuePotentialSystemPath(filesToMigratePath)) {
-    console.error("Invalid files path", { filesToMigratePath });
+    console.error('Invalid files path', { filesToMigratePath });
     return;
   }
 
   migrateFilesFromPath(filesToMigratePath);
   saveSummaryLog(SummaryLog);
 
-  console.log("\x1b[35m Migration ended \x1b[0m");
+  console.log('\x1b[35m Migration ended \x1b[0m');
 }
 
 function isValuePotentialSystemPath(value) {
@@ -25,15 +25,16 @@ function isValuePotentialSystemPath(value) {
 }
 
 function saveSummaryLog(log) {
-  fs.writeFile("migration-summary.json", JSON.stringify(log, null, 2), (err) => {
+  fs.writeFile('migration-summary.json', JSON.stringify(log, null, 2), (err) => {
     if (err) throw err;
-    console.log("\x1b[35m Migration summary saved to a file. \x1b[0m");
+    console.log('\x1b[35m Migration summary saved to a file. \x1b[0m');
   });
 }
 
 function migrateFilesFromPath(dirPath) {
   const files = fs.readdirSync(dirPath);
 
+  // eslint-disable-next-line consistent-return
   files.forEach((file) => {
     const filePath = path.join(dirPath, file);
     const filePathMetaData = fs.statSync(filePath);

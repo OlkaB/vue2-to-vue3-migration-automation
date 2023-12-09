@@ -3,13 +3,16 @@ const {
   ValidInjectSlots,
   InvalidInjectSlots,
   ValidProvidedSlots,
-  InvalidProvidedSlots
- } = require('./testData');
- const { getWhiteSpaceCleanedString } = require('../../testUtils');
+  InvalidProvidedSlots,
+} = require('./testData');
+const { getWhiteSpaceCleanedString } = require('../../testUtils');
 
-
-
-const testString = ({stringInput, stringOutput, testRegex}) =>  expect(getWhiteSpaceCleanedString(replaceOldSlotSyntax(stringInput, testRegex))).toEqual(getWhiteSpaceCleanedString(stringOutput));
+const testString = ({
+  stringInput,
+  stringOutput,
+  testRegex,
+}) => expect(getWhiteSpaceCleanedString(replaceOldSlotSyntax(stringInput, testRegex)))
+  .toEqual(getWhiteSpaceCleanedString(stringOutput));
 
 describe('test replaceOldSlotSyntax', () => {
   test.each([
@@ -20,7 +23,7 @@ describe('test replaceOldSlotSyntax', () => {
     [ValidInjectSlots[1], '<template   v-if="title || $slots[\'slot123\']"    #slot123   >'],
     [ValidInjectSlots[2], '<template #slotName>'],
   ])('replace ValidInjectSlots syntax', async (stringInput, stringOutput) => {
-    testString({stringInput, stringOutput, testRegex: SLOT_INJECT_REGEX})
+    testString({ stringInput, stringOutput, testRegex: SLOT_INJECT_REGEX });
   });
 
   test.each([
@@ -29,14 +32,14 @@ describe('test replaceOldSlotSyntax', () => {
     #card__title   >`],
     [ValidProvidedSlots[1], '<slot   v-if="title || $slots[\'card__title\']"    #slot123   >'],
   ])('replace ValidProvidedSlots syntax', async (stringInput, stringOutput) => {
-    testString({stringInput, stringOutput, testRegex: SLOT_PROVIDE_REGEX});
+    testString({ stringInput, stringOutput, testRegex: SLOT_PROVIDE_REGEX });
   });
 
   test.each(InvalidInjectSlots)('replaceOldSlotSyntax should return unchanged provided string', async (stringInput) => {
-    testString({stringInput, stringOutput: stringInput, testRegex: SLOT_INJECT_REGEX});
+    testString({ stringInput, stringOutput: stringInput, testRegex: SLOT_INJECT_REGEX });
   });
 
   test.each(InvalidProvidedSlots)('replaceOldSlotSyntax should return unchanged provided string', async (stringInput) => {
-    testString({stringInput, stringOutput: stringInput, testRegex: SLOT_PROVIDE_REGEX});
+    testString({ stringInput, stringOutput: stringInput, testRegex: SLOT_PROVIDE_REGEX });
   });
 });

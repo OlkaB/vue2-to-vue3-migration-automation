@@ -9,7 +9,7 @@ const MigrateableAttributeSync = [
     :vip-user-surname.sync="surname"
   />`,
   `<SomeForm :age.sync="user.age"  v-model="category"   :address.sync="user.address"
-  >...</SomeForm>`
+  >...</SomeForm>`,
 ];
 
 const NonMigrateableAttributeSync = [
@@ -31,4 +31,4 @@ const NonMigrateableAttributeSync = [
 module.exports = {
   MigrateableAttributeSync,
   NonMigrateableAttributeSync,
-}
+};

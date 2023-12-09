@@ -19,7 +19,7 @@ const MigrateableTranslations = [
       default: vueI18n.tc('global.product', 2)
     }
   },`,
-   `export const ActionButtons = (federatedItemName) => ({
+  `export const ActionButtons = (federatedItemName) => ({
     [ToolbarActions.COPY_ITEM]: {
       label: i18n.tc('global.copyItem', 1),
       icon: IconDownload,
@@ -28,7 +28,7 @@ const MigrateableTranslations = [
   `title: {
     type: String,
     default: VueI18n.tc('global.error', 1)
-  }`
+  }`,
 ];
 
 const NotMigrateableTranslations = [
@@ -46,7 +46,7 @@ const NotMigrateableTranslations = [
   },`,
   `loadingText() {
     return this.$t('global.pleaseWaitLoading', { itemName: this.$tc('global.option', 2).toLowerCase() });
-  },`
+  },`,
 ];
 
 const MigrateableFilesContent = [
@@ -76,11 +76,11 @@ const MigrateableFilesContent = [
   });`,
   `loadingText() {
     return VueI18n.t('global.pleaseWaitLoading', { itemName: i18n.tc('global.option', 2).toLowerCase() });
-  },`
+  },`,
 ];
 
 module.exports = {
   MigrateableTranslations,
   NotMigrateableTranslations,
-  MigrateableFilesContent
+  MigrateableFilesContent,
 };

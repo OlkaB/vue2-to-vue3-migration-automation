@@ -1,8 +1,8 @@
 const { TRANSLATIONS_VIA_INSTANCE_REGEX } = require('../index');
 const {
   MigrateableTranslations,
-  NotMigrateableTranslations
- } = require('./testData');
+  NotMigrateableTranslations,
+} = require('./testData');
 
 describe('test TRANSLATIONS_VIA_INSTANCE_REGEX', () => {
   test.each(MigrateableTranslations)('TRANSLATIONS_VIA_INSTANCE_REGEX should pass with strings containing translations outside vue instance (not referenced via "this")', async (caseString) => {

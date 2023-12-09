@@ -6,9 +6,9 @@ name="card__title"   >`,
 ];
 
 const InvalidProvidedSlots = [
-  "",
-  "true",
-  "123",
+  '',
+  'true',
+  '123',
   `<slot
 v-if="title || $slots['card__title']"
    > name="card__title"`,
@@ -26,18 +26,18 @@ const ValidInjectSlots = [
 ];
 
 const InvalidInjectSlots = [
-  "",
-  "true",
-  "123",
+  '',
+  'true',
+  '123',
   `<template
  v-if="title || $slots['card__title']"
    > slot="card__title"`,
   '<template   v-if="title || $slots[\'card__title\']"    name="card__title"   >',
-  "<template #slotName>",
+  '<template #slotName>',
   '<template   v-if="title || $slots[\'card__title\']"    :slot="card__title"   >',
   `<template
  v-if="title || $slots['card__title']"
-   > slot="card__title">`
+   > slot="card__title">`,
 ];
 
 module.exports = {

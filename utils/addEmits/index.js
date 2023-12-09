@@ -1,26 +1,27 @@
 const EMIT_REGEX = /\$emit\(('[^']*')/;
-const VUE_COMPONENT_INSTANCE_START_STRING = "export default {";
+const VUE_COMPONENT_INSTANCE_START_STRING = 'export default {';
 const START_STRING_LENGTH = VUE_COMPONENT_INSTANCE_START_STRING.length;
 
 function addEmits(fileContent, filePath) {
-  if(typeof fileContent !== 'string') return fileContent;
+  if (typeof fileContent !== 'string') return fileContent;
 
   let fileContentModified = fileContent;
   const emitsNames = getAllEmitsNames(fileContent);
 
   if (Array.isArray(emitsNames) && emitsNames.length > 0) {
-    fileContentModified = addEmitsToComponent({fileContent, emitsNames, filePath});
+    fileContentModified = addEmitsToComponent({ fileContent, emitsNames, filePath });
   }
 
   return fileContentModified;
 }
 
 function getAllEmitsNames(fileContent) {
-  if (typeof fileContent !== "string") return null;
+  if (typeof fileContent !== 'string') return null;
   let match;
   const regex = new RegExp(EMIT_REGEX, 'g');
   const emitNames = new Set();
 
+  // eslint-disable-next-line no-cond-assign
   while ((match = regex.exec(fileContent)) !== null) {
     emitNames.add(match[1]);
   }
@@ -32,12 +33,12 @@ function wrapEmitNamesInEmitsSyntax(emitNames) {
   return `emits: [${emitNames.join(', ')}],`;
 }
 
-function addEmitsToComponent({fileContent, emitsNames, filePath}) {
+function addEmitsToComponent({ fileContent, emitsNames, filePath }) {
   const emitsSyntaxToInsert = wrapEmitNamesInEmitsSyntax(emitsNames);
   const index = fileContent.indexOf(VUE_COMPONENT_INSTANCE_START_STRING);
 
   if (index === -1) {
-    console.error(`Couldn't add emits entry to component instance. No '${VUE_COMPONENT_INSTANCE_START_STRING}' string found in `, filePath)
+    console.error(`Couldn't add emits entry to component instance. No '${VUE_COMPONENT_INSTANCE_START_STRING}' string found in `, filePath);
     return fileContent;
   }
 

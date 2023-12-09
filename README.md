@@ -1,5 +1,6 @@
 # [POC] vue2-to-vue3-migration-automation
 Tool helping migrate vue2 to vue3.
+Assumption: we migrate vue, js files => stores, mixins, tests (including comments)
 
 # Please note
 This is quickly/simply built tool to migrate basic Vue2 to Vue3 syntax [POC]. Should be evolved further with more type checks and tests.

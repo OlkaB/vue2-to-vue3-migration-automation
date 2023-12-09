@@ -14,3 +14,4 @@ This is quickly/simply built tool to migrate basic Vue2 to Vue3 syntax [POC]. Sh
 - attribute.sync replaced with v-model:attribute
 - $props and $listeners are now available via $attrs.$props and $attrs.$listeners
 - removing .native event modifier
+- replace old lifecycle hooks' names with new ones

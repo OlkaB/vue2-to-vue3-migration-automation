@@ -52,7 +52,7 @@ $props[propName]    =>      $attrs.$props[propName]
 ## $scopedSlots
  property is removed and all slots are exposed via $slots as functions
 
-## Lifecycle hooks
+## ✅ Lifecycle hooks
 From                                  To
   beforeDestroy() {...}      =>       beforeUnmount() {...}
   destroyed                  =>       unmounted

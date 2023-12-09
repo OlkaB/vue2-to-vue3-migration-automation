@@ -25,6 +25,7 @@ exports.FILE_CONTENT_DELEGATES = {
   },
   removeEventNativeModifier: {
     migrateMethod: removeEventNativeModifier,
+    migrateFileTypes: [FILE_TYPES_FOR_MIGRATION.vue],
   },
   migrateAttributeSync: {
     migrateMethod: migrateAttributeSync,

@@ -74,7 +74,7 @@ function updateFileContent({ filePath, fileContent, fileExtension }) {
 }
 
 function checkCanUseMigrateMethodOnFile(fileExtension, delegateMigrateFileTypes) {
-  return delegateMigrateFileTypes.find(
+  return delegateMigrateFileTypes?.find(
     (migrateFileType) => EXTENSION_PER_FILE_TYPE[migrateFileType] === fileExtension,
   );
 }

@@ -1,8 +1,8 @@
 const { EMIT_REGEX } = require('../index');
 const {
   CasesWithEmits,
-  CasesWithoutEmits
- } = require('./testData');
+  CasesWithoutEmits,
+} = require('./testData');
 
 describe('test EMIT_REGEX', () => {
   test.each(CasesWithEmits)('EMIT_REGEX should pass with strings containing emits', async (caseString) => {
@@ -17,7 +17,7 @@ describe('test EMIT_REGEX', () => {
     [CasesWithEmits[0], "'multiple-file-upload'"],
     [CasesWithEmits[1], "'change'"],
     [CasesWithEmits[2], "'accordion-toggled'"],
-    [CasesWithEmits[3], "'update:search-query'"]
+    [CasesWithEmits[3], "'update:search-query'"],
   ])('EMIT_REGEX should extract emit name correctly', async (caseString, expectedEmitName) => {
     const [, emitName] = caseString.match(EMIT_REGEX) || [];
     expect(emitName).toEqual(expectedEmitName);

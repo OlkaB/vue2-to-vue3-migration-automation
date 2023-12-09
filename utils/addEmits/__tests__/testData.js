@@ -48,7 +48,7 @@ const CasesWithoutEmits = [
     set(query) {
       this.emit('update:search-query', query);
     }
-  }`
+  }`,
 ];
 
 const FilesContentWithEmits = [
@@ -126,7 +126,7 @@ const FilesContentWithEmits = [
       }
     }
   }
-  </script>`
+  </script>`,
 ];
 
 const FilesContentWithoutEmits = [
@@ -151,12 +151,12 @@ const FilesContentWithoutEmits = [
       }
     }
   }
-  </script>`
+  </script>`,
 ];
 
 module.exports = {
   CasesWithEmits,
   CasesWithoutEmits,
   FilesContentWithEmits,
-  FilesContentWithoutEmits
+  FilesContentWithoutEmits,
 };

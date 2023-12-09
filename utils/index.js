@@ -4,7 +4,10 @@ const { FILES_TO_MIGRATE_EXTENSIONS, EXTENSION_PER_FILE_TYPE } = require('./File
 const { FILE_CONTENT_DELEGATES } = require('./FileContentDelegates');
 
 const FILE_ENCODING = 'utf8';
-const SummaryLog = {};
+const SummaryLog = {
+  migrations: {},
+  migratedFilesCount: 0,
+};
 
 function migrateToVue3(filesToMigratePath) {
   console.log('\x1b[35m Migration starting \x1b[0m');
@@ -15,13 +18,22 @@ function migrateToVue3(filesToMigratePath) {
   }
 
   migrateFilesFromPath(filesToMigratePath);
-  saveSummaryLog(SummaryLog);
+  const logSummarised = supplyFilesCountToSummaryLog(SummaryLog);
+  saveSummaryLog(logSummarised);
 
   console.log('\x1b[35m Migration ended \x1b[0m');
 }
 
 function isValuePotentialSystemPath(value) {
   return typeof value === 'string' && value !== path.basename(value);
+}
+
+function supplyFilesCountToSummaryLog(log) {
+  const migratedFilesCount = Object.keys(log.migrations).length;
+  return {
+    ...log,
+    migratedFilesCount,
+  };
 }
 
 function saveSummaryLog(log) {
@@ -81,7 +93,7 @@ function checkCanUseMigrateMethodOnFile(fileExtension, delegateMigrateFileTypes)
 
 // TODO drop pure function in favour of speedy not drilling SummaryLog down
 function saveDataToSummaryLog(filePath, delegateId) {
-  SummaryLog[filePath] = [...(SummaryLog[filePath] || []), delegateId];
+  SummaryLog.migrations[filePath] = [...(SummaryLog.migrations[filePath] || []), delegateId];
 }
 
 module.exports = { migrateToVue3 };

@@ -1,4 +1,4 @@
-const PROPS_LISTENERS_REGEX = /(?<=this\.|wrapper.vm.|\s|['"`]|=>)(\$props\b|\$listeners\b)[^\w]*/;
+const PROPS_LISTENERS_REGEX = /(?<=this\.|\.{3}|wrapper.vm.|\s|['"`]|=>)(\$props\b|\$listeners\b)[^\w]*/;
 
 function migratePropsAndListeners() {
   // TODO

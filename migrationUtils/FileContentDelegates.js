@@ -5,7 +5,6 @@ const { addEmits } = require('./addEmits/index');
 const { migrateTranslations } = require('./migrateTranslations/index');
 const { removeEventNativeModifier } = require('./removeEventNativeModifier/index');
 const { migrateAttributeSync } = require('./migrateAttributeSync/index');
-const { migratePropsAndListeners } = require('./migratePropsAndListeners/index');
 const { migrateLifecycleHooks } = require('./migrateLifecycleHooks/index');
 
 const DEFAULT_MIGRATION_FILES_TYPES = [
@@ -32,10 +31,6 @@ exports.FILE_CONTENT_DELEGATES = {
   },
   migrateAttributeSync: {
     migrateMethod: migrateAttributeSync,
-    migrateFileTypes: DEFAULT_MIGRATION_FILES_TYPES,
-  },
-  migratePropsAndListeners: {
-    migrateMethod: migratePropsAndListeners,
     migrateFileTypes: DEFAULT_MIGRATION_FILES_TYPES,
   },
   migrateLifecycleHooks: {

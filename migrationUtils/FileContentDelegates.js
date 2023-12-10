@@ -1,5 +1,4 @@
 const { FILE_TYPES_FOR_MIGRATION } = require('./FilesToMigrate');
-const { migrateSlots } = require('./migrtateSlots/index');
 const { addEmits } = require('./addEmits/index');
 const { migrateTranslations } = require('./migrateTranslations/index');
 const { removeEventNativeModifier } = require('./removeEventNativeModifier/index');
@@ -8,10 +7,6 @@ const { migratePropsAndListeners } = require('./migratePropsAndListeners/index')
 const { migrateLifecycleHooks } = require('./migrateLifecycleHooks/index');
 
 exports.FILE_CONTENT_DELEGATES = {
-  migrateSlots: {
-    migrateMethod: migrateSlots,
-    migrateFileTypes: [FILE_TYPES_FOR_MIGRATION.vue],
-  },
   addEmits: {
     migrateMethod: addEmits,
     migrateFileTypes: [FILE_TYPES_FOR_MIGRATION.vue],

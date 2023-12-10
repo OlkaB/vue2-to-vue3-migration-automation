@@ -1,4 +1,6 @@
 const { FILE_TYPES_FOR_MIGRATION } = require('./FilesToMigrate');
+
+const { migrateScopedSlots } = require('./migrateScopedSlots/index');
 const { addEmits } = require('./addEmits/index');
 const { migrateTranslations } = require('./migrateTranslations/index');
 const { removeEventNativeModifier } = require('./removeEventNativeModifier/index');
@@ -6,35 +8,38 @@ const { migrateAttributeSync } = require('./migrateAttributeSync/index');
 const { migratePropsAndListeners } = require('./migratePropsAndListeners/index');
 const { migrateLifecycleHooks } = require('./migrateLifecycleHooks/index');
 
+const DEFAULT_MIGRATION_FILES_TYPES = [
+  FILE_TYPES_FOR_MIGRATION.vue,
+  FILE_TYPES_FOR_MIGRATION.js, // includes mixins
+];
+
 exports.FILE_CONTENT_DELEGATES = {
+  migrateScopedSlots: {
+    migrateMethod: migrateScopedSlots,
+    migrateFileTypes: DEFAULT_MIGRATION_FILES_TYPES,
+  },
   addEmits: {
     migrateMethod: addEmits,
-    migrateFileTypes: [FILE_TYPES_FOR_MIGRATION.vue],
+    migrateFileTypes: DEFAULT_MIGRATION_FILES_TYPES,
   },
   migrateTranslations: {
     migrateMethod: migrateTranslations,
-    migrateFileTypes: [
-      FILE_TYPES_FOR_MIGRATION.vue,
-      FILE_TYPES_FOR_MIGRATION,
-    ],
+    migrateFileTypes: DEFAULT_MIGRATION_FILES_TYPES,
   },
   removeEventNativeModifier: {
     migrateMethod: removeEventNativeModifier,
-    migrateFileTypes: [FILE_TYPES_FOR_MIGRATION.vue],
+    migrateFileTypes: DEFAULT_MIGRATION_FILES_TYPES,
   },
   migrateAttributeSync: {
     migrateMethod: migrateAttributeSync,
-    migrateFileTypes: [FILE_TYPES_FOR_MIGRATION.vue],
+    migrateFileTypes: DEFAULT_MIGRATION_FILES_TYPES,
   },
   migratePropsAndListeners: {
     migrateMethod: migratePropsAndListeners,
-    migrateFileTypes: [FILE_TYPES_FOR_MIGRATION.vue],
+    migrateFileTypes: DEFAULT_MIGRATION_FILES_TYPES,
   },
   migrateLifecycleHooks: {
     migrateMethod: migrateLifecycleHooks,
-    migrateFileTypes: [
-      FILE_TYPES_FOR_MIGRATION.vue,
-      FILE_TYPES_FOR_MIGRATION,
-    ],
+    migrateFileTypes: DEFAULT_MIGRATION_FILES_TYPES,
   },
 };

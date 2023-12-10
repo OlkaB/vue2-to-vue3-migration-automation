@@ -1,3 +1,3 @@
 module.exports = {
-  testMatch: ['**/utils/**/?(*.)+(spec|test).[jt]s?(x)'],
+  testMatch: ['**/migrationUtils/**/?(*.)+(spec|test).[jt]s?(x)'],
 };

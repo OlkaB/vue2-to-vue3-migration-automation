@@ -9,7 +9,7 @@ This is quickly/simply built tool to migrate basic Vue2 to Vue3 syntax [POC]. Sh
 `yarn migrate`
 
 # Current state:
-- simple slot syntax replacement
+- $scopedSlots replaced with $slots
 - adding 'emits' entry with emitted by component events names
 - translations via translation instance replacement
 - attribute.sync replaced with v-model:attribute

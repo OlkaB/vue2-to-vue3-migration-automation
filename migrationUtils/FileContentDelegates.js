@@ -1,4 +1,5 @@
 const { FILE_TYPES_FOR_MIGRATION } = require('./FilesToMigrate');
+const { MigrationDelegatesNames } = require('./MigrationDelegatesNames');
 
 const { migrateScopedSlots } = require('./migrateScopedSlots/index');
 const { addEmits } = require('./addEmits/index');
@@ -13,27 +14,27 @@ const DEFAULT_MIGRATION_FILES_TYPES = [
 ];
 
 exports.FILE_CONTENT_DELEGATES = {
-  migrateScopedSlots: {
+  [MigrationDelegatesNames.SCOPED_SLOTS]: {
     migrateMethod: migrateScopedSlots,
     migrateFileTypes: DEFAULT_MIGRATION_FILES_TYPES,
   },
-  addEmits: {
+  [MigrationDelegatesNames.ADD_EMITS]: {
     migrateMethod: addEmits,
     migrateFileTypes: DEFAULT_MIGRATION_FILES_TYPES,
   },
-  migrateTranslations: {
+  [MigrationDelegatesNames.TRANSLATIONS]: {
     migrateMethod: migrateTranslations,
     migrateFileTypes: DEFAULT_MIGRATION_FILES_TYPES,
   },
-  removeEventNativeModifier: {
+  [MigrationDelegatesNames.EVENT_NATIVE_MODIFIER]: {
     migrateMethod: removeEventNativeModifier,
     migrateFileTypes: DEFAULT_MIGRATION_FILES_TYPES,
   },
-  migrateAttributeSync: {
+  [MigrationDelegatesNames.ATTRIBUTE_SYNC]: {
     migrateMethod: migrateAttributeSync,
     migrateFileTypes: DEFAULT_MIGRATION_FILES_TYPES,
   },
-  migrateLifecycleHooks: {
+  [MigrationDelegatesNames.LIFECYCLE_HOOKS]: {
     migrateMethod: migrateLifecycleHooks,
     migrateFileTypes: DEFAULT_MIGRATION_FILES_TYPES,
   },

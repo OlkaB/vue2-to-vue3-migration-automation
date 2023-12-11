@@ -1,6 +1,8 @@
 const EMIT_REGEX = /\$emit\(('[^']*')/;
 const VUE_COMPONENT_INSTANCE_START_STRING = 'export default {';
 const START_STRING_LENGTH = VUE_COMPONENT_INSTANCE_START_STRING.length;
+const ADDED_LINES_FORMATTING_CONNECTOR = `\n  `;
+const EMIT_NAME_LINE_FORMATTING_CONNECTOR = `${ADDED_LINES_FORMATTING_CONNECTOR}  `;
 
 function addEmits(fileContent, filePath) {
   if (typeof fileContent !== 'string') return fileContent;
@@ -30,7 +32,7 @@ function getAllEmitsNames(fileContent) {
 }
 
 function wrapEmitNamesInEmitsSyntax(emitNames) {
-  return `emits: [${emitNames.join(', ')}],`;
+  return `emits: [${EMIT_NAME_LINE_FORMATTING_CONNECTOR}${emitNames.join(`,${EMIT_NAME_LINE_FORMATTING_CONNECTOR}`)}${ADDED_LINES_FORMATTING_CONNECTOR}],`;
 }
 
 function addEmitsToComponent({ fileContent, emitsNames, filePath }) {

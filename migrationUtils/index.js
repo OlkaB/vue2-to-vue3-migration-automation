@@ -10,7 +10,7 @@ const SummaryLog = {
   migratedFilesCount: 0,
 };
 
-function migrateToVue3(filesToMigratePath) {
+function migrateToVue3({ filesToMigratePath, migrationMethods }) {
   console.log('\x1b[35m Migration starting \x1b[0m');
 
   if (!isValuePotentialSystemPath(filesToMigratePath)) {
@@ -18,7 +18,7 @@ function migrateToVue3(filesToMigratePath) {
     return;
   }
 
-  migrateFilesFromPath(filesToMigratePath);
+  migrateFilesFromPath(filesToMigratePath, migrationMethods);
   const logSummarised = supplyFilesCountToSummaryLog(SummaryLog);
   saveSummaryLog(logSummarised, filesToMigratePath);
 
@@ -45,7 +45,7 @@ function saveSummaryLog(log, logPath) {
   });
 }
 
-function migrateFilesFromPath(dirPath) {
+function migrateFilesFromPath(dirPath, migrationMethods) {
   const files = fs.readdirSync(dirPath);
 
   // eslint-disable-next-line consistent-return
@@ -55,24 +55,29 @@ function migrateFilesFromPath(dirPath) {
     const isDirectory = filePathMetaData.isDirectory();
 
     if (isDirectory) {
-      return migrateFilesFromPath(filePath);
+      return migrateFilesFromPath(filePath, migrationMethods);
     }
     const fileExtension = path.extname(filePath);
     if (FILES_TO_MIGRATE_EXTENSIONS.includes(fileExtension)) {
-      migrateFile(filePath, fileExtension);
+      migrateFile(filePath, fileExtension, migrationMethods);
     }
   });
 }
 
-function migrateFile(filePath, fileExtension) {
+function migrateFile(filePath, fileExtension, migrationMethods) {
   const fileContent = fs.readFileSync(filePath, FILE_ENCODING);
-  const fileContentToSave = updateFileContent({ filePath, fileContent, fileExtension });
+  const fileContentToSave = updateFileContent({
+    filePath, fileContent, fileExtension, migrationMethods,
+  });
   fs.writeFileSync(filePath, fileContentToSave, FILE_ENCODING);
 }
 
-function updateFileContent({ filePath, fileContent, fileExtension }) {
+function updateFileContent({
+  filePath, fileContent, fileExtension, migrationMethods,
+}) {
   return Object.entries(FILE_CONTENT_DELEGATES).reduce(
     (updatedFileContent, [delegateId, { migrateMethod, migrateFileTypes }]) => {
+      if (!migrationMethods.includes(delegateId)) return updatedFileContent;
       const canUseMigrateMethod = checkCanUseMigrateMethodOnFile(fileExtension, migrateFileTypes);
       if (!canUseMigrateMethod) return updatedFileContent;
 

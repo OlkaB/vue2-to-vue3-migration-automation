@@ -4,6 +4,7 @@ const { FILES_TO_MIGRATE_EXTENSIONS, EXTENSION_PER_FILE_TYPE } = require('./File
 const { FILE_CONTENT_DELEGATES } = require('./FileContentDelegates');
 
 const FILE_ENCODING = 'utf8';
+const LOG_FILE_NAME = 'migration-summary.json';
 const SummaryLog = {
   migrations: {},
   migratedFilesCount: 0,
@@ -19,7 +20,7 @@ function migrateToVue3(filesToMigratePath) {
 
   migrateFilesFromPath(filesToMigratePath);
   const logSummarised = supplyFilesCountToSummaryLog(SummaryLog);
-  saveSummaryLog(logSummarised);
+  saveSummaryLog(logSummarised, filesToMigratePath);
 
   console.log('\x1b[35m Migration ended \x1b[0m');
 }
@@ -36,8 +37,9 @@ function supplyFilesCountToSummaryLog(log) {
   };
 }
 
-function saveSummaryLog(log) {
-  fs.writeFile('migration-summary.json', JSON.stringify(log, null, 2), (err) => {
+function saveSummaryLog(log, logPath) {
+  const pathToSave = path.join(logPath, LOG_FILE_NAME);
+  fs.writeFile(pathToSave, JSON.stringify(log, null, 2), (err) => {
     if (err) throw err;
     console.log('\x1b[35m Migration summary saved to a file. \x1b[0m');
   });

@@ -6,12 +6,14 @@ const EMIT_NAME_LINE_FORMATTING_CONNECTOR = `${ADDED_LINES_FORMATTING_CONNECTOR}
 const HAS_EMITS_REGEX = /\s*emits\s*:\s*\[[^\]]*\]/g;
 
 function addEmits(fileContent, filePath) {
-  if (typeof fileContent !== 'string') return fileContent;
+  if (typeof fileContent !== 'string' || HAS_EMITS_REGEX.test(fileContent)) {
+    return fileContent;
+  }
 
   let fileContentModified = fileContent;
   const emitsNames = getAllEmitsNames(fileContent);
 
-  if (Array.isArray(emitsNames) && emitsNames.length > 0) {
+  if (Array.isArray(emitsNames) && emitsNames.length > 0 && !HAS_EMITS_REGEX.test(fileContent)) {
     fileContentModified = addEmitsToComponent({ fileContent, emitsNames, filePath });
   }
 
@@ -37,11 +39,6 @@ function wrapEmitNamesInEmitsSyntax(emitNames) {
 }
 
 function addEmitsToComponent({ fileContent, emitsNames, filePath }) {
-  if (HAS_EMITS_REGEX.test(fileContent)) {
-    console.warn(`This component already has emits added: `, filePath);
-    return fileContent;
-  }
-
   const emitsSyntaxToInsert = wrapEmitNamesInEmitsSyntax(emitsNames);
   const index = fileContent.indexOf(VUE_COMPONENT_INSTANCE_START_STRING);
 

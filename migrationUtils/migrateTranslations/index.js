@@ -1,4 +1,4 @@
-const TRANSLATIONS_VIA_INSTANCE_REGEX = /\.(t|tc)\('/;
+const TRANSLATIONS_VIA_INSTANCE_REGEX = /[^global.]\.(t|tc)\('/;
 const TRANSLATION_CHUNK_TO_ADD = 'global.';
 
 function migrateTranslations(fileContent) {

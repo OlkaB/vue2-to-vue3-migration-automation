@@ -3,6 +3,7 @@ const VUE_COMPONENT_INSTANCE_START_STRING = 'export default {';
 const START_STRING_LENGTH = VUE_COMPONENT_INSTANCE_START_STRING.length;
 const ADDED_LINES_FORMATTING_CONNECTOR = `\n  `;
 const EMIT_NAME_LINE_FORMATTING_CONNECTOR = `${ADDED_LINES_FORMATTING_CONNECTOR}  `;
+const HAS_EMITS_REGEX = /\s*emits\s*:\s*\[[^\]]*\]/g;
 
 function addEmits(fileContent, filePath) {
   if (typeof fileContent !== 'string') return fileContent;
@@ -36,6 +37,11 @@ function wrapEmitNamesInEmitsSyntax(emitNames) {
 }
 
 function addEmitsToComponent({ fileContent, emitsNames, filePath }) {
+  if (HAS_EMITS_REGEX.test(fileContent)) {
+    console.warn(`This component already has emits added: `, filePath);
+    return fileContent;
+  }
+
   const emitsSyntaxToInsert = wrapEmitNamesInEmitsSyntax(emitsNames);
   const index = fileContent.indexOf(VUE_COMPONENT_INSTANCE_START_STRING);
 

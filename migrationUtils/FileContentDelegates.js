@@ -7,6 +7,7 @@ const { migrateTranslations } = require('./migrateTranslations/index');
 const { removeEventNativeModifier } = require('./removeEventNativeModifier/index');
 const { migrateAttributeSync } = require('./migrateAttributeSync/index');
 const { migrateLifecycleHooks } = require('./migrateLifecycleHooks/index');
+const { removeEmits } = require('./removeEmits/index');
 
 const DEFAULT_MIGRATION_FILES_TYPES = [
   FILE_TYPES_FOR_MIGRATION.vue,
@@ -36,6 +37,10 @@ exports.FILE_CONTENT_DELEGATES = {
   },
   [MigrationDelegatesNames.LIFECYCLE_HOOKS]: {
     migrateMethod: migrateLifecycleHooks,
+    migrateFileTypes: DEFAULT_MIGRATION_FILES_TYPES,
+  },
+  [MigrationDelegatesNames.REMOVE_EMITS]: {
+    migrateMethod: removeEmits,
     migrateFileTypes: DEFAULT_MIGRATION_FILES_TYPES,
   },
 };

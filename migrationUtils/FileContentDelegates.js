@@ -9,6 +9,7 @@ const { migrateAttributeSync } = require('./migrateAttributeSync/index');
 const { migrateLifecycleHooks } = require('./migrateLifecycleHooks/index');
 const { removeEmits } = require('./removeEmits/index');
 const { migrateUid } = require('./migrateUid/index');
+const { migrateVuelidatePropertyName } = require('./migrateVuelidatePropertyName/index');
 
 const DEFAULT_MIGRATION_FILES_TYPES = [
   FILE_TYPES_FOR_MIGRATION.vue,
@@ -49,7 +50,7 @@ exports.FILE_CONTENT_DELEGATES = {
     migrateFileTypes: [FILE_TYPES_FOR_MIGRATION.vue],
   },
   [MigrationDelegatesNames.VUELIDATE]: {
-    migrateMethod: migrateUid,
+    migrateMethod: migrateVuelidatePropertyName,
     migrateFileTypes: DEFAULT_MIGRATION_FILES_TYPES,
   },
 };

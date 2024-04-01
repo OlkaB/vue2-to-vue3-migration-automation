@@ -1,4 +1,4 @@
-const NATIVE_UID_REGEX = /[^a-zA-Z0-9](_uid)[^a-zA-Z0-9]/g;
+const NATIVE_UID_REGEX = /[^a-zA-Z0-9](_uid)[^a-zA-Z0-9]/g; // needs improvement - works under control and dev checks
 const NEW_UID_SYNTAX = '$.uid';
 
 const migrateUid = (fileContent) => {

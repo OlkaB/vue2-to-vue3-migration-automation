@@ -7,4 +7,5 @@ exports.MigrationDelegatesNames = {
   ATTRIBUTE_SYNC: 'ATTRIBUTE_SYNC',
   LIFECYCLE_HOOKS: 'LIFECYCLE_HOOKS',
   UID: 'UID',
+  VUELIDATE: 'VUELIDATE',
 };

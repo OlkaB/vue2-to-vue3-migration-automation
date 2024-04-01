@@ -48,4 +48,8 @@ exports.FILE_CONTENT_DELEGATES = {
     migrateMethod: migrateUid,
     migrateFileTypes: [FILE_TYPES_FOR_MIGRATION.vue],
   },
+  [MigrationDelegatesNames.VUELIDATE]: {
+    migrateMethod: migrateUid,
+    migrateFileTypes: DEFAULT_MIGRATION_FILES_TYPES,
+  },
 };

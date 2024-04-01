@@ -10,5 +10,6 @@ const migrateUid = (fileContent) => {
 };
 
 module.exports = {
+  NATIVE_UID_REGEX,
   migrateUid,
 };

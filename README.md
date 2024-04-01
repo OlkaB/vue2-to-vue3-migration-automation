@@ -18,5 +18,5 @@ Up to now [04.2024] served us well with few Vue2 repo being already migrated, bu
 - removing .native event modifier
 - replace old lifecycle hooks' names with new ones
 - replace _uid with new Vue3's $.uid
-- replace Vuelidate $v syntax with v$ one
+- replace Vuelidate `$v` syntax with `v$` one
 
